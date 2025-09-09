@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">blocked_customer_form.blocked_customer_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Blocked Customer Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="MagoArab\BlockCustomer\Block\Adminhtml\BlockedCustomer\Edit\SaveButton"/>
+            <button name="save_and_continue" class="MagoArab\BlockCustomer\Block\Adminhtml\BlockedCustomer\Edit\SaveAndContinueButton"/>
+            <button name="back" class="MagoArab\BlockCustomer\Block\Adminhtml\BlockedCustomer\Edit\BackButton"/>
+            <button name="delete" class="MagoArab\BlockCustomer\Block\Adminhtml\BlockedCustomer\Edit\DeleteButton"/>
+        </buttons>
+        <namespace>blocked_customer_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>blocked_customer_form.blocked_customer_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="blocked_customer_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="magoarab_blockcustomer/blockedcustomer/save"/>
+        </settings>
+        <dataProvider class="MagoArab\BlockCustomer\Model\BlockedCustomer\DataProvider" name="blocked_customer_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>block_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General Information</label>
+        </settings>
+        <field name="phone_number" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">blocked_customer</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Phone Number</label>
+                <dataScope>phone_number</dataScope>
+            </settings>
+        </field>
+        <field name="backup_phone_number" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">blocked_customer</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Backup Phone Number</label>
+                <dataScope>backup_phone_number</dataScope>
+            </settings>
+        </field>
+        <field name="customer_email" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">blocked_customer</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-email" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Customer Email</label>
+                <dataScope>customer_email</dataScope>
+            </settings>
+        </field>
+        <field name="reason" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">blocked_customer</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Reason for Blocking</label>
+                <dataScope>reason</dataScope>
+            </settings>
+        </field>
+        <field name="is_active" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">blocked_customer</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Status</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MagoArab\BlockCustomer\Model\Config\Source\Status"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

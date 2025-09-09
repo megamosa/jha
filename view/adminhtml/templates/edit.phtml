@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php 
+// Simple debug
+$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/magoarab_debug.log');
+$logger = new \Zend\Log\Logger();
+$logger->addWriter($writer);
+$logger->info('MagoArab BlockCustomer: Edit template loaded');
+$logger->info('MagoArab BlockCustomer: Child HTML: ' . $block->getChildHtml('form'));
+?>
+<?php echo $block->getChildHtml('form') ?>

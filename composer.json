@@ -1,0 +1,28 @@
+{
+    "name": "magoarab/module-blockcustomer",
+    "description": "MagoArab Block Customer Module",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "MagoArab",
+            "email": "info@magoarab.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-customer": "*",
+        "magento/module-ui": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MagoArab\\BlockCustomer\\": ""
+        }
+    }
+}

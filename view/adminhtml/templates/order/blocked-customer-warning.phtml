@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php if ($block->isBlockedCustomer()): ?>
+    <?php $blockedInfo = $block->getBlockedCustomerInfo(); ?>
+    <div class="message message-error error blocked-customer-warning" style="margin: 20px 0; padding: 20px; border: 3px solid #ff0000; background-color: #ffe6e6;">
+        <div class="message-inner">
+            <div class="message-content">
+                <h3 style="color: #ff0000; margin: 0 0 10px 0; font-size: 18px;">
+                    ⚠️ WARNING: BLOCKED CUSTOMER DETECTED!
+                </h3>
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">
+                    This customer is on the blocked list. DO NOT PROCESS THIS ORDER!
+                </p>
+                <div style="background-color: #fff; padding: 15px; border-radius: 5px; margin-top: 10px;">
+                    <p style="margin: 0 0 5px 0;"><strong>Phone Number:</strong> <?php echo $block->escapeHtml($block->getOrderPhoneNumber()) ?></p>
+                    <p style="margin: 0 0 5px 0;"><strong>Block Reason:</strong> <?php echo $block->escapeHtml($blockedInfo['reason'] ?? 'No reason provided') ?></p>
+                    <p style="margin: 0 0 5px 0;"><strong>Customer Email:</strong> <?php echo $block->escapeHtml($block->getOrder()->getCustomerEmail() ?: 'Guest') ?></p>
+                    <p style="margin: 0 0 5px 0;"><strong>Order ID:</strong> #<?php echo $block->escapeHtml($block->getOrder()->getIncrementId()) ?></p>
+                </div>
+                <div style="margin-top: 15px; padding: 10px; background-color: #ffcccc; border-radius: 5px;">
+                    <p style="margin: 0; font-weight: bold; color: #cc0000;">
+                        🚫 RECOMMENDED ACTION: Cancel this order and do not process any shipments or payments.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

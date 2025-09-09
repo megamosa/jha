@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MagoArab_BlockCustomer::blocked_customers" title="Blocked Customers" module="MagoArab_BlockCustomer" sortOrder="100" parent="Magento_Customer::customer" resource="MagoArab_BlockCustomer::blocked_customers"/>
+        <add id="MagoArab_BlockCustomer::blocked_customers_manage" title="Manage Blocked Customers" module="MagoArab_BlockCustomer" sortOrder="10" parent="MagoArab_BlockCustomer::blocked_customers" action="magoarab_blockcustomer/blockedcustomer/index" resource="MagoArab_BlockCustomer::blocked_customers"/>
+    </menu>
+</config>

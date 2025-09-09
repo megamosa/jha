@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MagoArab\BlockCustomer\Api\BlockedCustomerRepositoryInterface" type="MagoArab\BlockCustomer\Model\BlockedCustomerRepository"/>
+    <preference for="MagoArab\BlockCustomer\Api\Data\BlockedCustomerInterface" type="MagoArab\BlockCustomer\Model\BlockedCustomer"/>
+    <preference for="MagoArab\BlockCustomer\Api\Data\BlockedCustomerSearchResultsInterface" type="MagoArab\BlockCustomer\Model\Data\BlockedCustomerSearchResults"/>
+    
+    <type name="MagoArab\BlockCustomer\Model\BlockedCustomer\DataProvider">
+        <arguments>
+            <argument name="name" xsi:type="string">blocked_customer_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">block_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="MagoArab\BlockCustomer\Model\ResourceModel\BlockedCustomer\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magoarab_blocked_customers</argument>
+            <argument name="resourceModel" xsi:type="string">MagoArab\BlockCustomer\Model\ResourceModel\BlockedCustomer</argument>
+        </arguments>
+    </virtualType>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blocked_customer_form_data_source" xsi:type="string">MagoArab\BlockCustomer\Model\ResourceModel\BlockedCustomer\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

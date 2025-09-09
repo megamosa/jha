@@ -1,0 +1,55 @@
+.admin__data-grid-wrap .data-grid tr[data-blocked-customer="1"] {
+    background-color: #ffe6e6 !important;
+    border-left: 5px solid #ff0000 !important;
+}
+
+.admin__data-grid-wrap .data-grid tr[data-blocked-customer="1"]:hover {
+    background-color: #ffcccc !important;
+}
+
+/* Style for blocked customer indicator */
+.admin__data-grid-wrap .data-grid td[data-column="is_blocked_customer"] {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Style for BLOCKED text */
+.admin__data-grid-wrap .data-grid td[data-column="is_blocked_customer"]:contains("BLOCKED") {
+    color: #ff0000 !important;
+    background-color: #ffe6e6 !important;
+}
+
+/* Style for OK text */
+.admin__data-grid-wrap .data-grid td[data-column="is_blocked_customer"]:contains("OK") {
+    color: #00aa00 !important;
+    background-color: #e6ffe6 !important;
+}
+
+/* Blocked Customer Warning in Order View */
+.blocked-customer-warning {
+    border: 3px solid #ff0000 !important;
+    background-color: #ffe6e6 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3) !important;
+}
+
+.blocked-customer-warning h3 {
+    color: #ff0000 !important;
+    margin: 0 0 10px 0 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+.blocked-customer-warning .message-content {
+    color: #333 !important;
+}
+
+.blocked-customer-warning .message-content p {
+    margin: 0 0 10px 0 !important;
+    font-size: 16px !important;
+}
+
+.blocked-customer-warning .message-content strong {
+    color: #cc0000 !important;
+    font-weight: bold !important;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Checkout Process Events -->
+    <event name="sales_order_place_before">
+        <observer name="magoarab_blockcustomer_checkout_process" instance="MagoArab\BlockCustomer\Observer\CheckoutProcessObserver"/>
+    </event>
+    
+    <!-- Customer Registration Events -->
+    <event name="customer_register_success">
+        <observer name="magoarab_blockcustomer_customer_registration" instance="MagoArab\BlockCustomer\Observer\CustomerRegistrationObserver"/>
+    </event>
+    
+    <!-- Customer Login Events -->
+    <event name="customer_login">
+        <observer name="magoarab_blockcustomer_customer_login" instance="MagoArab\BlockCustomer\Observer\CustomerLoginObserver"/>
+    </event>
+    <event name="sales_order_load_after">
+        <observer name="magoarab_blockcustomer_order_grid" instance="MagoArab\BlockCustomer\Observer\OrderGridObserver"/>
+    </event>
+    <event name="sales_order_view_before">
+        <observer name="magoarab_blockcustomer_order_view" instance="MagoArab\BlockCustomer\Observer\OrderViewObserver"/>
+    </event>
+</config>

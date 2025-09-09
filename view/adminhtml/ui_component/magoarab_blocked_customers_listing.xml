@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MagoArab. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">magoarab_blocked_customers_listing.magoarab_blocked_customers_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Blocked Customer</label>
+            </button>
+        </buttons>
+        <spinner>magoarab_blocked_customers_columns</spinner>
+        <deps>
+            <dep>magoarab_blocked_customers_listing.magoarab_blocked_customers_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="magoarab_blocked_customers_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">block_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MagoArab_BlockCustomer::blocked_customers</aclResource>
+        <dataProvider class="MagoArab\BlockCustomer\Ui\Component\Listing\DataProvider" name="magoarab_blocked_customers_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>block_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <filterSelect name="is_active" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="MagoArab\BlockCustomer\Ui\Component\Listing\Column\IsActive\Options"/>
+                    <caption translate="true">Select...</caption>
+                    <label translate="true">Status</label>
+                    <dataScope>is_active</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="magoarab_blockcustomer/blockedcustomer/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="activate">
+                <settings>
+                    <type>activate</type>
+                    <label translate="true">Activate</label>
+                    <url path="magoarab_blockcustomer/blockedcustomer/massActivate"/>
+                </settings>
+            </action>
+            <action name="deactivate">
+                <settings>
+                    <type>deactivate</type>
+                    <label translate="true">Deactivate</label>
+                    <url path="magoarab_blockcustomer/blockedcustomer/massDeactivate"/>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="magoarab_blocked_customers_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="magoarab_blockcustomer/blockedcustomer/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">block_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">magoarab_blocked_customers_listing.magoarab_blocked_customers_listing.magoarab_blocked_customers_columns.ids</param>
+            </editorConfig>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>block_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="block_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="phone_number">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Phone Number</label>
+            </settings>
+        </column>
+        <column name="backup_phone_number">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Backup Phone Number</label>
+            </settings>
+        </column>
+        <column name="customer_email">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Customer Email</label>
+            </settings>
+        </column>
+        <column name="reason" class="MagoArab\BlockCustomer\Ui\Component\Listing\Column\Reason">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <editorType>textarea</editorType>
+                </editor>
+                <label translate="true">Reason</label>
+            </settings>
+        </column>
+        <column name="is_active" class="MagoArab\BlockCustomer\Ui\Component\Listing\Column\IsActive">
+            <settings>
+                <filter>select</filter>
+                <options class="MagoArab\BlockCustomer\Ui\Component\Listing\Column\IsActive\Options"/>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
